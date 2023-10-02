@@ -32,7 +32,6 @@ async function connectToDatabase() {
                 return rows;
             },
         };
-
         return dbInstance;
     } catch (error) {
         console.error('Error connecting to the database:', error);
@@ -41,6 +40,15 @@ async function connectToDatabase() {
 }
 
 module.exports = connectToDatabase;
+
+async function viewAllDepartments(dbInstance) {
+    try {
+        const rows = await dbInstance.query("SELECT * FROM department");
+        console.table(rows);
+    } catch (error) {
+        console.error("Error viewing departments:", error);
+    }
+}
 
 async function viewAllDepartments(dbInstance) {
     try {
@@ -72,7 +80,6 @@ async function viewAllEmployees(dbInstance) {
 }
 
 
-
 async function addDepartment(dbInstance) {
     console.log('Add Department');
     try {
@@ -85,8 +92,8 @@ async function addDepartment(dbInstance) {
         ]);
         const dep_name = response.department_name;
 
-        // Use the correct column name in your SQL query
-        await dbInstance.query("INSERT INTO department (name) VALUES (?)", [dep_name]);
+        // Use the correct column name in your SQL query (department_name)
+        await dbInstance.query("INSERT INTO department (department_name) VALUES (?)", [dep_name]);
         console.log(`Added ${dep_name} to the database`);
     } catch (error) {
         console.error("Error adding department:", error);
@@ -97,7 +104,7 @@ async function addRole(dbInstance) {
     console.log("Add Role");
     try {
         const depResults = await dbInstance.query("SELECT * FROM department");
-        const depNames = depResults.map((row) => row.name); // Map department names from the array of objects
+        const depNames = depResults.map((row) => row.department_name); // Use 'department_name' as the property name
 
         const response = await inquirer.prompt([
             {
@@ -132,7 +139,6 @@ async function addRole(dbInstance) {
         console.error("Error adding role:", error);
     }
 }
-
 
 async function addEmployee(dbInstance) {
     console.log("Add Employee");
@@ -194,7 +200,6 @@ async function addEmployee(dbInstance) {
     }
 }
 
-
 async function updateEmployeeRole(dbInstance) {
     console.log("Update Employee Role");
     try {
@@ -223,15 +228,13 @@ async function updateEmployeeRole(dbInstance) {
         const roleIndex = roles.indexOf(roleName);
         const role_id = rolesResults[roleIndex].id;
 
-        // Update the employee's role in the database using the SQL statement
+        // Update the employee's role in the database
         await dbInstance.query("UPDATE employee SET role_id = ? WHERE first_name = ?", [role_id, employeeName.split(' ')[0]]);
         console.log(`Updated ${employeeName}'s role to ${roleName}`);
     } catch (error) {
         console.error("Error updating employee role:", error);
     }
 }
-
-// Other functions for adding roles, employees, and updating roles...
 
 async function init() {
     try {
@@ -286,8 +289,5 @@ async function init() {
         console.error("Error:", error);
     }
 }
-
-// console.log(depResults);
-
 
 startApp();

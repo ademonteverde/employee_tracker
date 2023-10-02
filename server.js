@@ -1,8 +1,7 @@
-const db = require('./db/connection'); // Import the db object
+// Import the db object
+const db = require('./db/connection'); 
 
-const init = require('./tracker'); // Import the init function
+// Import the init function
+const init = require('./tracker'); 
 
-// ...
-
-// Pass the db object to the init function
 init(db);

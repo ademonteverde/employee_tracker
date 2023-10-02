@@ -38,9 +38,8 @@ npm start
 ## Assets
 The following image demonstrates the web application's appearance and functionality:
 
-![Example of Note Taker Homepage](./images/employee_tracker_demo1.png)
+![Example of Employee Tracker Demo](./images/employee_tracker_demo.png)
 
-![Example of Note Taker App](./images/employee_tracker_demo2.png)
 
 ## Link to GitHub Repository:
 
@@ -49,6 +48,10 @@ The following image demonstrates the web application's appearance and functional
 ## Link to deployed application:
 
 [https://ademonteverde.github.io/employee_tracker/](https://ademonteverde.github.io/employee_tracker/)
+
+## Link to demo video:
+
+[https://watch.screencastify.com/v/FHAyFY7E5tsOwLVMvgbe](https://watch.screencastify.com/v/FHAyFY7E5tsOwLVMvgbe)
 
 ## License
 
